@@ -10,6 +10,16 @@ app.use(express.json());
 
 const upload = multer({ storage: multer.memoryStorage() })
 
+app.get('/', (req, res) => {
+    return res.status(200).json({
+        message: "Cloud Project API is running",
+        endpoints: {
+            "POST /create-post": "Create a new post (multipart form: image, caption)",
+            "GET /posts": "Fetch all posts"
+        }
+    })
+})
+
 app.post('/create-post', upload.single('image'), async (req, res) => {
     try {
         if (!req.file) {
