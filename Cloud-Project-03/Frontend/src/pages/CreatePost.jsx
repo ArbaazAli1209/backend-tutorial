@@ -1,29 +1,32 @@
 import React from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { useLoading } from '../context/LoadingContext.jsx'
 
 const CreatePost = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    const { setLoading } = useLoading()
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        const formData = new FormData(e.target);
+        const formData = new FormData(e.target)
 
-        axios.post(`${import.meta.env.VITE_PORT_URL}/create-post`, formData )
-        .then((res) => {
+        setLoading(true)
+
+        try {
+            await axios.post(
+                `${import.meta.env.VITE_PORT_URL}/create-post`,
+                formData
+            )
 
             navigate('/feed')
-
-        })
-
-        .catch((err) => {
-
+        } catch (err) {
             console.log(err)
             alert("Error creating post")
-
-        })
-
+        } finally {
+            setLoading(false)
+        }
     }
 
   return (

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useLoading } from '../context/LoadingContext.jsx'
 
 const Feed = () => {
+
+    const { setLoading } = useLoading()
 
     const [posts, setPosts] = useState([
         {
@@ -12,26 +15,40 @@ const Feed = () => {
     ])
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_PORT_URL}/posts`)
-        .then((res) => {
-            setPosts(res.data.posts)
-        })
-    }, [])
+        const fetchPosts = async () => {
+            setLoading(true)
 
-  return (
-    <section className='feed-section'>
-        {posts.length > 0 ? (
-            posts.map((post) => (
-                <div key={post._id} className='post-card'>
-                    <img src={post.image} alt={post.caption} />
-                    <h3>{post.caption}</h3>
-                </div>
-            ))
-        ) : (
-            <p>No posts available.</p>
-        )}
-    </section>
-  )
+            try {
+                const res = await axios.get(
+                    `${import.meta.env.VITE_PORT_URL}/posts`
+                )
+
+                setPosts(res.data.posts)
+            } catch (err) {
+                console.log(err)
+                alert("Error fetching posts")
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchPosts()
+    }, [setLoading])
+
+    return (
+        <section className='feed-section'>
+            {posts.length > 0 ? (
+                posts.map((post) => (
+                    <div key={post._id} className='post-card'>
+                        <img src={post.image} alt={post.caption} />
+                        <h3>{post.caption}</h3>
+                    </div>
+                ))
+            ) : (
+                <p>No posts available.</p>
+            )}
+        </section>
+    )
 }
 
 export default Feed
