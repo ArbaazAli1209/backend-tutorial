@@ -12,7 +12,7 @@ const Feed = () => {
     ])
 
     useEffect(() => {
-        axios.get('http://localhost:5000/posts')
+        axios.get(`${import.meta.env.VITE_PORT_URL}/posts`)
         .then((res) => {
             setPosts(res.data.posts)
         })

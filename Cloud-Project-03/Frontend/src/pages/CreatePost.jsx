@@ -10,7 +10,7 @@ const CreatePost = () => {
 
         const formData = new FormData(e.target);
 
-        axios.post('http://localhost:5000/create-post', formData )
+        axios.post(`${import.meta.env.VITE_PORT_URL}/create-post`, formData )
         .then((res) => {
 
             navigate('/feed')
