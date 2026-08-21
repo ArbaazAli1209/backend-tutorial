@@ -36,6 +36,15 @@ cd Frontend && npm run dev
 
 Frontend runs on `http://localhost:5173` | Backend on `http://localhost:5000`
 
+## 📚 Context & State Management
+
+Implemented **React Context API** for managing global loading states and data fetching:
+
+**Key Features:**
+- Global loading state management using Context
+- Automatic loading indicators during API calls
+- Error handling and state persistence
+- Post data context for sharing across components
 ```
 
 ## 📡 Available Scripts
