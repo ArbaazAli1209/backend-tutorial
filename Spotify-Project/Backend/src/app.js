@@ -7,6 +7,13 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+const cors = require('cors')
+
+app.use(cors({
+  origin: 'https://backend-tutorial-eta.vercel.app/login',
+  credentials: true,
+}))
+
 app.use('/api/auth', authRoutes);
 app.use('/api/music', musicRoutes);
 
