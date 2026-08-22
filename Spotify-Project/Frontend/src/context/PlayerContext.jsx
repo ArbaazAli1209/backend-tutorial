@@ -47,13 +47,22 @@ export function PlayerProvider({ children }) {
     }
   }
 
+  function stop() {
+    const audio = audioRef.current
+    audio.pause()
+    audio.currentTime = 0
+    audio.src = ''
+    setCurrent(null)
+    setIsPlaying(false)
+  }
+
   function seek(time) {
     audioRef.current.currentTime = time
     setProgress(time)
   }
 
   return (
-    <PlayerContext.Provider value={{ current, isPlaying, progress, duration, playTrack, togglePlay, seek }}>
+    <PlayerContext.Provider value={{ current, isPlaying, progress, duration, playTrack, togglePlay, seek, stop }}>
       {children}
     </PlayerContext.Provider>
   )

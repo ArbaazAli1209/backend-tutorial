@@ -1,9 +1,11 @@
 import { Link, NavLink } from 'react-router-dom'
 import { Disc3, LogOut, User } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import { usePlayer } from '../context/PlayerContext'
 
 export default function Navbar() {
   const { user, logout, isArtist } = useAuth()
+  const { stop } = usePlayer()
 
   const linkClass = ({ isActive }) =>
     `text-sm font-medium transition-colors ${isActive ? 'text-accent' : 'text-text-muted hover:text-text'}`
@@ -31,7 +33,7 @@ export default function Navbar() {
                 {user.username} · {user.role}
               </span>
               <button
-                onClick={logout}
+                onClick={() => { stop(); logout(); }}
                 className="flex items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 text-sm text-text-muted transition-colors hover:bg-surface-hover hover:text-text"
               >
                 <LogOut className="h-4 w-4" />
