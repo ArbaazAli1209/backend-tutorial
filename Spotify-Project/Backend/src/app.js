@@ -10,7 +10,7 @@ app.use(cookieParser());
 const cors = require('cors')
 
 app.use(cors({
-  origin: 'https://backend-tutorial-eta.vercel.app/login',
+  origin: 'https://spotify-artist-omega.vercel.app',
   credentials: true,
 }))
 
