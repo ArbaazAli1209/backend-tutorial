@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-2 font-display text-xl font-bold tracking-tight">
           <Disc3 className="h-6 w-6 text-accent" strokeWidth={1.5} />
-          Spotify
+          Spotify Artist
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
